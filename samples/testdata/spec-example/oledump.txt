@@ -1,0 +1,155 @@
+DEBUG    File size: 3072 bytes (C00h)
+DEBUG    fmt_header size = 76, +FAT = 512
+DEBUG    (b'\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1', b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00', 62, 3, 65534, 9, 6, 0, 0, 0, 1, 1, 0, 4096, 2, 1, 4294967294, 0)
+DEBUG    Minor Version = 62
+DEBUG    DLL Version   = 3 (expected: 3 or 4)
+DEBUG    Byte Order    = FFFE (expected: FFFE)
+DEBUG    Sector Size   = 512 bytes (expected: 512 or 4096)
+DEBUG    MiniFAT Sector Size   = 64 bytes (expected: 64)
+DEBUG    Number of Directory sectors = 0
+DEBUG    Number of FAT sectors = 1
+DEBUG    First Directory sector  = 1h
+DEBUG    Transaction Signature Number    = 0
+DEBUG    Mini Stream cutoff size = 1000h (expected: 1000h)
+DEBUG    First MiniFAT sector      = 2h
+DEBUG    Number of MiniFAT sectors = 1
+DEBUG    First DIFAT sector        = FFFFFFFEh
+DEBUG    Number of DIFAT sectors   = 0
+DEBUG    Maximum number of sectors in the file: 5 (5h)
+DEBUG    _check_duplicate_stream: sect=1h in FAT
+DEBUG    _check_duplicate_stream: sect=2h in FAT
+DEBUG    Loading the FAT table, starting with the 1st sector after the header
+DEBUG    len(sect)=436, so 109 integers
+DEBUG    isect = 0
+DEBUG    isect = FFFFFFFF
+DEBUG    found end of sector chain
+DEBUG    No DIFAT, because file size < 6.8MB.
+DEBUG    len(fat)=128, shrunk to nb_sect=5
+DEBUG    FAT references 5 sectors / Maximum 5 sectors in file
+DEBUG    
+FAT:
+DEBUG    Loading the Directory:
+DEBUG    OleFileIO.open(): sect=1h, size=2147483647, force_FAT=True
+DEBUG    OleStream.__init__:
+DEBUG      sect=1 (1), size=2147483647, offset=512, sectorsize=512, len(fat)=5, fp=<_io.BufferedReader name='src/Cfb/testdata/spec-example/sample.cfb'>
+DEBUG      stream with UNKNOWN SIZE
+DEBUG    nb_sectors = 5
+DEBUG    Reading stream sector[0] = 1h
+DEBUG    Reading stream sector[1] = FFFFFFFEh
+DEBUG    Reached ENDOFCHAIN sector for stream with unknown size
+DEBUG    Read data of length 512, the stream size was unknown
+DEBUG    loaddirectory: size=512, max_entries=4
+DEBUG    DirEntry SID=0: 'Root Entry'
+DEBUG     - type: 5
+DEBUG     - sect: 3h
+DEBUG     - SID left: 4294967295, right: 4294967295, child: 1
+DEBUG     - size: 576 (sizeLow=576, sizeHigh=0)
+DEBUG    _check_duplicate_stream: sect=3h in FAT
+DEBUG    build_storage_tree: SID=0 - 'Root Entry' - sid_child=1
+DEBUG    append_kids: child_sid=1
+DEBUG    DirEntry SID=1: 'Storage 1'
+DEBUG     - type: 1
+DEBUG     - sect: 0h
+DEBUG     - SID left: 4294967295, right: 4294967295, child: 2
+DEBUG     - size: 0 (sizeLow=0, sizeHigh=0)
+DEBUG    append_kids: child_sid=1 - 'Storage 1' - sid_left=4294967295, sid_right=4294967295, sid_child=2
+DEBUG    append_kids: child_sid=4294967295
+DEBUG    append_kids: child_sid=4294967295
+DEBUG    build_storage_tree: SID=1 - 'Storage 1' - sid_child=2
+DEBUG    append_kids: child_sid=2
+DEBUG    DirEntry SID=2: 'Stream 1'
+DEBUG     - type: 2
+DEBUG     - sect: 0h
+DEBUG     - SID left: 4294967295, right: 4294967295, child: 4294967295
+DEBUG     - size: 544 (sizeLow=544, sizeHigh=0)
+DEBUG    _check_duplicate_stream: sect=0h in MiniFAT
+DEBUG    append_kids: child_sid=2 - 'Stream 1' - sid_left=4294967295, sid_right=4294967295, sid_child=4294967295
+DEBUG    append_kids: child_sid=4294967295
+DEBUG    append_kids: child_sid=4294967295
+DEBUG    build_storage_tree: SID=2 - 'Stream 1' - sid_child=4294967295
+olefile version 0.47 2023-12-01 - https://www.decalage.info/en/olefile
+
+index        0        1        2        3        4        5        6        7 
+     0:        0 FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+     8: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    10: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    18: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    20: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    28: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    30: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    38: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    40: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    48: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    50: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    58: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    60: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+    68: FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF 
+index        0        1        2        3        4        5        6        7 
+     0: FATSECT  [ END. ] [ END. ]     ---> [ END. ] 
+--------------------------------------------------------------------
+src/Cfb/testdata/spec-example/sample.cfb
+--------------------------------------------------------------------
+'Root Entry' (root) 576 bytes 
+{56616700-C154-11CE-8553-00AA00A1F95B}
+  'Storage 1' (storage) 
+  {56616100-C154-11CE-8553-00AA00A1F95B}
+    'Stream 1' (stream) 544 bytes 
+Modification/Creation times of all directory entries:
+- Root Entry: mtime=1995-11-16 17:43:45 ctime=None
+- Storage 1: mtime=1995-11-16 17:43:45 ctime=1995-11-16 17:43:44
+- Stream 1: mtime=None ctime=None
+
+Properties from SummaryInformation stream:
+- codepage: None
+- title: None
+- subject: None
+- author: None
+- keywords: None
+- comments: None
+- template: None
+- last_saved_by: None
+- revision_number: None
+- total_edit_time: None
+- last_printed: None
+- create_time: None
+- last_saved_time: None
+- num_pages: None
+- num_words: None
+- num_chars: None
+- thumbnail: None
+- creating_application: None
+- security: None
+Properties from DocumentSummaryInformation stream:
+- codepage_doc: None
+- category: None
+- presentation_target: None
+- bytes: None
+- lines: None
+- paragraphs: None
+- slides: None
+- notes: None
+- hidden_slides: None
+- mm_clips: None
+- scale_crop: None
+- heading_pairs: None
+- titles_of_parts: None
+- manager: None
+- company: None
+- links_dirty: None
+- chars_with_spaces: None
+- unused: None
+- shared_doc: None
+- link_base: None
+- hlinks: None
+- hlinks_changed: None
+- version: None
+- dig_sig: None
+- content_type: None
+- content_status: None
+- language: None
+- doc_version: None
+
+Root entry name: "Root Entry"
+
+Non-fatal issues raised during parsing:
+None
