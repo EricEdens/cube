@@ -1,0 +1,5 @@
+.{
+    .{ .path = "sub/a", .size = 300, .xxh3 = 0xc290b15b86f41394 },
+    .{ .path = "kept", .size = 20000, .xxh3 = 0x2bea6f299b6ad616 },
+    .{ .path = "sub2/c", .size = 50, .xxh3 = 0xb5ef6bdbc6deaabe },
+}

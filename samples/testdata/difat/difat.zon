@@ -1,0 +1,5 @@
+.{
+    .{ .path = "big", .size = 25165824, .xxh3 = 0x50fd23a7dc568d0b },
+    .{ .path = "tiny", .size = 10, .xxh3 = 0xd9c97a64ea6f3716 },
+    .{ .path = "after", .size = 3000, .xxh3 = 0x495e2ac1b6460cd8 },
+}

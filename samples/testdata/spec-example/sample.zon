@@ -1,0 +1,3 @@
+.{
+    .{ .path = "Storage 1/Stream 1", .size = 544, .xxh3 = 0x704f16d17831f777 },
+}

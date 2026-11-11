@@ -1,0 +1,17 @@
+.{
+    .{ .path = "0", .size = 0, .xxh3 = 0x2d06800538d394c2 },
+    .{ .path = "1", .size = 1, .xxh3 = 0x65cd25028f98f158 },
+    .{ .path = "63", .size = 63, .xxh3 = 0xa3f2caa48445f5de },
+    .{ .path = "64", .size = 64, .xxh3 = 0x7ad027fbd2cba64a },
+    .{ .path = "65", .size = 65, .xxh3 = 0x32084caba1cf72d1 },
+    .{ .path = "511", .size = 511, .xxh3 = 0x4961ee00091b2947 },
+    .{ .path = "512", .size = 512, .xxh3 = 0xed12034ec18c0aae },
+    .{ .path = "513", .size = 513, .xxh3 = 0xd5f6c14c4d8cfb6a },
+    .{ .path = "4095", .size = 4095, .xxh3 = 0x4c28a5f984f26564 },
+    .{ .path = "4096", .size = 4096, .xxh3 = 0x7cf429ee54c3d5dc },
+    .{ .path = "4097", .size = 4097, .xxh3 = 0xc6ff16897fd828e5 },
+    .{ .path = "4160", .size = 4160, .xxh3 = 0x79cbd0fae70d5d8e },
+    .{ .path = "8191", .size = 8191, .xxh3 = 0x4d778746f315c7c1 },
+    .{ .path = "8192", .size = 8192, .xxh3 = 0xba2c4ed9b53965e4 },
+    .{ .path = "8193", .size = 8193, .xxh3 = 0xe4b13f465d2f8785 },
+}

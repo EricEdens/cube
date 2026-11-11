@@ -1,0 +1,12 @@
+.{
+    .{ .path = "DST/inner/i1", .size = 200, .xxh3 = 0x779d1578c701f3f6 },
+    .{ .path = "DST/inner/i2", .size = 9000, .xxh3 = 0x75c4dda08a003c5c },
+    .{ .path = "DST/s4copy", .size = 7000, .xxh3 = 0x4a670dc79963cafd },
+    .{ .path = "DST/s3moved", .size = 300, .xxh3 = 0x6b610f2f37934a2d },
+    .{ .path = "src/s1", .size = 100, .xxh3 = 0xde7346f0d4877270 },
+    .{ .path = "src/S2", .size = 5000, .xxh3 = 0xba1b498252ca2334 },
+    .{ .path = "src/s4", .size = 7000, .xxh3 = 0x4a670dc79963cafd },
+    .{ .path = "src/s5", .size = 6000, .xxh3 = 0xbcad0e50eedde68b },
+    .{ .path = "src/inner/i1", .size = 200, .xxh3 = 0x779d1578c701f3f6 },
+    .{ .path = "src/inner/i2", .size = 9000, .xxh3 = 0x75c4dda08a003c5c },
+}

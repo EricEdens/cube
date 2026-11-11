@@ -1,0 +1,9 @@
+.{
+    .{ .path = "bounce", .size = 8192, .xxh3 = 0x1eedb586fddcd31e },
+    .{ .path = "shrink", .size = 4097, .xxh3 = 0x4c4c8d44f9e53815 },
+    .{ .path = "to-4095", .size = 4096, .xxh3 = 0xa6e7d5ead6f2441a },
+    .{ .path = "to-4096", .size = 4096, .xxh3 = 0x68b51853c61affec },
+    .{ .path = "grow-set", .size = 20000, .xxh3 = 0xdf82e36c020823bd },
+    .{ .path = "neighbor", .size = 2000, .xxh3 = 0xb57fe6710548479d },
+    .{ .path = "grow-write", .size = 4200, .xxh3 = 0x2557bcdd692e7fe4 },
+}

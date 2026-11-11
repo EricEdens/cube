@@ -1,0 +1,6 @@
+.{
+    .{ .path = "log", .size = 60000, .xxh3 = 0x760e7df457376f38 },
+    .{ .path = "mid", .size = 65536, .xxh3 = 0x9bd7fdccc5ce0022 },
+    .{ .path = "small", .size = 2000, .xxh3 = 0x0f7cf8972c6ec096 },
+    .{ .path = "sparse", .size = 20100, .xxh3 = 0xccdf56b14b3b5b2e },
+}

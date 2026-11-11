@@ -1,0 +1,17 @@
+.{
+    .{ .path = "b8", .size = 8388608, .xxh3 = 0x36f1d1018a3b9478 },
+    .{ .path = "b16", .size = 16777216, .xxh3 = 0xb209764c614df657 },
+    .{ .path = "b40", .size = 41943040, .xxh3 = 0xf0bb517733b3b4a3 },
+    .{ .path = "m00", .size = 64, .xxh3 = 0x93656146602e890f },
+    .{ .path = "m01", .size = 397, .xxh3 = 0x4a42ed32f32e6db7 },
+    .{ .path = "m02", .size = 730, .xxh3 = 0xd2f75fe0c767be7f },
+    .{ .path = "m03", .size = 1063, .xxh3 = 0xc46bc7fe73740466 },
+    .{ .path = "m04", .size = 1396, .xxh3 = 0xa57d91bc31068cd4 },
+    .{ .path = "m05", .size = 1729, .xxh3 = 0xfd413d2fcf23f54b },
+    .{ .path = "m06", .size = 2062, .xxh3 = 0xb1fa651467b8bfc0 },
+    .{ .path = "m07", .size = 2395, .xxh3 = 0xf3c780f34a930b77 },
+    .{ .path = "m08", .size = 2728, .xxh3 = 0xdafd68636880dc42 },
+    .{ .path = "m09", .size = 3061, .xxh3 = 0xdd4dbcfed622022f },
+    .{ .path = "m10", .size = 3394, .xxh3 = 0xc65e926bcddfce15 },
+    .{ .path = "m11", .size = 3727, .xxh3 = 0x487c2933bf94ca47 },
+}

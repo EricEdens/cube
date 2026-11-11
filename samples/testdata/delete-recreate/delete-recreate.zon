@@ -1,0 +1,14 @@
+.{
+    .{ .path = "a", .size = 10, .xxh3 = 0x0a3e5cf5161d7c10 },
+    .{ .path = "b", .size = 50000, .xxh3 = 0xedc386e5d594db14 },
+    .{ .path = "c", .size = 5000, .xxh3 = 0x82fad946129a30f0 },
+    .{ .path = "d", .size = 1000, .xxh3 = 0xbfc19410c43466ea },
+    .{ .path = "e", .size = 0, .xxh3 = 0x2d06800538d394c2 },
+    .{ .path = "f", .size = 0, .xxh3 = 0x2d06800538d394c2 },
+    .{ .path = "g", .size = 4096, .xxh3 = 0x530c3f841a222ef6 },
+    .{ .path = "i", .size = 64, .xxh3 = 0x94848486338babac },
+    .{ .path = "j", .size = 9000, .xxh3 = 0x2390755fc8e2825c },
+    .{ .path = "dir", .size = 12345, .xxh3 = 0x720e792a56e9a303 },
+    .{ .path = "flip/inside", .size = 777, .xxh3 = 0x6c551dc2987c8166 },
+    .{ .path = "churn", .size = 149, .xxh3 = 0xb917ee32c1e114ae },
+}
