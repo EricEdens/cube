@@ -1,0 +1,13 @@
+.{
+    .name = .cube,
+    .version = "0.0.0",
+    .fingerprint = 0x30feb1b81a2fd6eb,
+    .minimum_zig_version = "0.17.1",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "LICENSE",
+        "README.md",
+    },
+}
