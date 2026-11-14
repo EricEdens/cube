@@ -1,6 +1,6 @@
 const std = @import("std");
 const Cfb = @This();
-const Difat = @import("Cfb/Difat.zig");
+const Fat = @import("Cfb/Fat.zig");
 
 const testing = std.testing;
 
@@ -44,5 +44,5 @@ pub const Sid = enum(u32) {
 };
 
 test {
-    _ = Difat;
+    _ = Fat;
 }
