@@ -1,15 +1,14 @@
 const std = @import("std");
+const Cfb = @import("../Cfb.zig");
 const Difat = @This();
+const SectorNumber = Cfb.SectorNumber;
 
 image: []align(4) const u8,
 
 const shift: u32 = 0x1e;
-const first: u32 = 0x44;
-const count: u32 = 0x48;
-const array: u32 = 0x4c;
-
-const endstrm: u32 = 0xfffffffe;
-const freesct: u32 = 0xffffffff;
+const first: u32 = 0x11;
+const count: u32 = 0x12;
+const array: u32 = 0x13;
 
 pub fn init(image: []align(4) const u8) !Difat {
     if (image.len < 512) return error.ImageTooShort;
@@ -18,47 +17,36 @@ pub fn init(image: []align(4) const u8) !Difat {
     return .{ .image = image };
 }
 
-pub fn startSectorNumber(difat: *const Difat) u32 {
-    return std.mem.readInt(u32, difat.image[first..][0..4], .little);
+/// The first DIFAT sector number, declared in the header.
+pub fn startSectorNumber(self: *const Difat) SectorNumber {
+    return .fromInt(self.readu32(0, first).?);
 }
 
-pub fn numDifatSectors(difat: *const Difat) u32 {
-    return std.mem.readInt(u32, difat.image[count..][0..4], .little);
+/// The number of difat sectors, declared in the header.
+pub fn numDifatSectors(self: *const Difat) u32 {
+    return self.readu32(0, count).?;
 }
 
-pub fn iterator(difat: *const Difat) Iterator {
-    return .{
-        .difat = difat,
-        .curr = std.mem.bytesAsSlice(u32, difat.image[array..][0..(109 * 4)]),
-        .next_sect_number = difat.startSectorNumber(),
-    };
-}
-
-pub const Iterator = struct {
-    difat: *const Difat,
-    curr: []const u32,
-    next_sect_number: u32,
-
-    pub fn next(iter: *Iterator) ?u32 {
-        if (iter.curr.len == 0) {
-            const total_sectors = @divCeil(iter.difat.image.len, 512);
-            if (iter.next_sect_number + 1 > total_sectors) return null;
-
-            const sector_bytes: []align(4) const u8 = @alignCast(
-                iter.difat.image[((iter.next_sect_number + 1) * 512)..][0..512],
-            );
-            const sector = std.mem.bytesAsSlice(u32, sector_bytes);
-            iter.curr = sector[0..127];
-            iter.next_sect_number = sector[127];
-        }
-        if (iter.curr.len > 0) {
-            defer iter.curr = iter.curr[1..];
-            return iter.curr[0];
-        }
-
-        return null;
+/// Reads DIFAT[n]
+pub fn difat(self: *const Difat, n: u32) ?SectorNumber {
+    if (n < 109) return .fromInt(self.readu32(0, array + n).?);
+    var sect = self.startSectorNumber();
+    var idx = n - 109;
+    while (sect.isRegular()) : (idx -= 127) {
+        const file_sect = sect.toInt() + 1;
+        if (idx < 127) return .fromInt(self.readu32(file_sect, idx) orelse break);
+        sect = .fromInt(self.readu32(file_sect, 127) orelse break);
     }
-};
+    return null;
+}
+
+fn readu32(self: *const Difat, sect: u32, idx: u32) ?u32 {
+    const pos: u64 = (sect * 128 + idx) * 4;
+    return if (pos + 4 <= self.image.len)
+        std.mem.readInt(u32, self.image[pos..][0..4], .little)
+    else
+        null;
+}
 
 // -- TESTS --
 
@@ -75,53 +63,51 @@ test "spec-example" {
     defer testing.allocator.free(bytes);
     try testing.expectEqual(3072, bytes.len);
 
-    const difat: Difat = try .init(@alignCast(bytes));
-    try testing.expectEqual(0xfffffffe, difat.startSectorNumber());
-    try testing.expectEqual(0, difat.numDifatSectors());
+    const self: Difat = try .init(@alignCast(bytes));
+    try testing.expectEqual(SectorNumber.endofchain, self.startSectorNumber());
+    try testing.expectEqual(0, self.numDifatSectors());
 
-    var iter = difat.iterator();
-    try testing.expectEqual(0, iter.next());
-    for (0..108) |_| try testing.expectEqual(0xffffffff, iter.next());
-    try testing.expectEqual(null, iter.next());
+    try testing.expectEqual(0, self.difat(0).?.toInt());
+    for (1..109) |n| try testing.expectEqual(SectorNumber.freesect, self.difat(@intCast(n)));
+    try testing.expectEqual(null, self.difat(109));
 }
 
-// A 25M v3 file, that spills the difat across 3 sectors in the body.
-test "three-difat-sectors" {
+// A 25M v3 file, that spills the self across 3 sectors in the body.
+test "three-self-sectors" {
     const bytes = try files.readAlloc(
         testing.io,
         testing.allocator,
         "src/Cfb/testdata/difat.cfb",
     );
     defer testing.allocator.free(bytes);
-    const difat: Difat = try .init(@alignCast(bytes));
-    try testing.expectEqual(3, difat.numDifatSectors());
+    const self: Difat = try .init(@alignCast(bytes));
+    try testing.expectEqual(3, self.numDifatSectors());
 
-    // This makes three checks, all to avoid hardcoding the difat:
+    // This makes three checks, all to avoid hardcoding the self:
     //   1. There are 388 entries, terminated by 0xffffffff.
     //   2. The sum of the entries is the same as we get from oledump.
     //   3. Spot check values near the sector boundaries.
 
-    var iter = difat.iterator();
     var total: u64 = 0;
-    var actual: std.ArrayList(u32) = .empty;
+    var actual: std.ArrayList(SectorNumber) = .empty;
     defer actual.deinit(testing.allocator);
     for (0..388) |idx| {
-        if (iter.next()) |el| {
-            total += el;
+        if (self.difat(@intCast(idx))) |el| {
+            total += el.toInt();
             try actual.append(testing.allocator, el);
         } else {
             std.testing.failPrint("null found at index {d}", .{idx});
             return error.TestFailed;
         }
     }
-    try testing.expectEqual(0xffffffff, iter.next().?);
+    try testing.expectEqual(SectorNumber.freesect, self.difat(388).?);
     try testing.expectEqual(0x924114, total);
 
-    try std.testing.expectEqual(0, actual.items[0]);
-    try std.testing.expectEqual(0x35ef, actual.items[108]);
-    try std.testing.expectEqual(0x3670, actual.items[109]);
-    try std.testing.expectEqual(0x36f2, actual.items[110]);
-    try std.testing.expectEqual(0x7672, actual.items[237]);
-    try std.testing.expectEqual(0x76f3, actual.items[238]);
-    try std.testing.expectEqual(0x7774, actual.items[239]);
+    try std.testing.expectEqual(0, actual.items[0].toInt());
+    try std.testing.expectEqual(0x35ef, actual.items[108].toInt());
+    try std.testing.expectEqual(0x3670, actual.items[109].toInt());
+    try std.testing.expectEqual(0x36f2, actual.items[110].toInt());
+    try std.testing.expectEqual(0x7672, actual.items[237].toInt());
+    try std.testing.expectEqual(0x76f3, actual.items[238].toInt());
+    try std.testing.expectEqual(0x7774, actual.items[239].toInt());
 }
